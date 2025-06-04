@@ -281,7 +281,7 @@ $events = [
                     <!-- Events Section -->
                     <div class="col-md-6">
                         <div class="events-section">
-                            <h5 class="mb-0 fw-bold">EVENT TERBARU</h5>
+                            <h5 class="mb-0 fw-bold">EVENT TERBARU CUYYY</h5>
 
                             <div class="events-table">
                                 <table class="table table-sm">
