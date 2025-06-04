@@ -1,0 +1,493 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to bottom,
+            #0077ff 0%,
+            #00a1ff 30%,
+            #7ac8ff 70%,
+            #eff9fc 100%);
+    background-attachment: fixed;
+    /* This fixes the gradient */
+    background-size: 100% 100%;
+    /* Ensures full coverage */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+
+/* Gaya untuk header */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    max-width: 1000px;
+    margin: 15px auto;
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 24px;
+    color: #0077ff;
+    text-decoration: none;
+    font-style: bold;
+}
+
+.search-bar {
+    flex-grow: 1;
+    max-width: 400px;
+    margin: 0 20px;
+}
+
+.search-bar input {
+    backdrop-filter: blur(10px);
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid rgba(0, 123, 255, 0.1);
+    border-radius: 25px;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 21px rgba(144, 196, 255, 1);
+}
+
+.search-bar input:focus {
+    border-color: #007bff;
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+
+/* Navigasi */
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 25px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #f0f0f0;
+}
+
+.home-link {
+    color: #007bff !important;
+    font-weight: 600 !important;
+}
+
+/* Tombol menu (untuk layar kecil) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsif untuk layar kecil */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #ddd;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* Container utama */
+.container {
+    text-align: center;
+    padding: 20px;
+    justify-content: center;
+}
+
+.header-title {
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+
+.timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+
+/* Container untuk layout atas (rekening dan upload) */
+.top-section {
+    display: flex;
+    gap: 20px;
+    max-width: 1200px;
+    width: 90%;
+    margin: 30px auto 20px auto;
+    align-items: stretch;
+}
+
+/* Rekening container - sebelah kiri */
+.rekening-container {
+    border-radius: 10px;
+    flex: 1;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 0px 32px rgba(0, 100, 200, 0.5);
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Upload container - sebelah kanan */
+.upload-container {
+    border-radius: 10px;
+    flex: 1;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 0px 32px rgba(0, 100, 200, 0.5);
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Instructions container - di tengah bawah */
+.instructions {
+    border-radius: 10px;
+    max-width: 600px;
+    width: 80%;
+    margin: 20px auto 30px auto;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    box-shadow: 0 0px 32px rgba(0, 100, 200, 0.5);
+}
+
+.rekening-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: white;
+    text-align: center;
+}
+
+.rekening-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rekening-list li {
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 100, 200, 0.2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bank {
+    font-weight: bold;
+    color: white;
+    margin-right: 8px;
+    min-width: 60px;
+}
+
+.nomor {
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 8px;
+}
+
+.nama {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+/* Upload section styles */
+.upload-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color:rgb(255, 253, 253);
+    text-align: center;
+}
+#paymentProof[type="file"] {
+  font-size: 30px;
+  color: #0077ff00;
+  height: 100px;
+  border: none;
+  cursor: pointer;
+}
+
+.file-upload-container {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.375rem;
+    background-color: rgba(255, 255, 255, 0);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#paymentProof[type="file"] {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.file-upload-container:hover,
+.file-upload-container:active,
+.file-upload-container.drag-over {
+    background-color: #ffffff; /* jadi putih solid pas hover/klik/drag-over */
+    border-color: var(--primary-color);
+}
+
+.file-upload-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: transparent;
+    color: #212529;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    pointer-events: none;
+}
+
+.file-upload-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.upload-text {
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.9); 
+    z-index: 0;
+    transition: color 0.3s ease; 
+}
+
+.file-upload-container:hover .upload-text,
+.file-upload-container:active .upload-text,
+.file-upload-container.drag-over .upload-text {
+    color: rgba(33, 37, 41, 0.7); 
+}
+
+
+.image-preview {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 0.375rem;
+}
+
+
+
+.file-info {
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    display: none;
+}
+
+.file-info.show {
+    display: block;
+}
+
+.upload-note {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9); 
+    text-align: center;
+    margin-top: 8px;
+    font-style: italic;
+    transition: color 0.3s ease; 
+}
+
+.file-upload-container:hover .upload-note,
+.file-upload-container:active .upload-note,
+.file-upload-container.drag-over .upload-note {
+    color: rgba(33, 37, 41, 0.7);
+}
+
+
+.instructions-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: white;
+    text-align: center;
+}
+
+.instructions ol {
+    padding-left: 20px;
+    list-style-position: inside;
+    text-align: left;
+    margin: 0;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+}
+
+/* Responsive design - stack vertically pada layar kecil */
+@media screen and (max-width: 768px) {
+    .top-section {
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .rekening-container,
+    .upload-container {
+        width: 100%;
+    }
+
+    .instructions {
+        width: 80%;
+    }
+}
+
+.button button {
+    display: block;
+    margin: 30px auto;
+    padding: 15px 40px;
+    backdrop-filter: blur(10px);
+    background: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 100, 200, 0.5);
+    color: rgb(30, 142, 255);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+.share {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.share img {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s;
+}
+
+.share img:hover {
+    transform: scale(1.1);
+}
+
+.extra {
+    color: #007bff;
+}
+
+/* Footer */
+.footer {
+    background-color: #ffffff;
+    font-style: bold;
+    color: rgb(30, 142, 255);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(0, 100, 200, 0.1);
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links li a {
+    color: #419dff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-links li a:hover {
+    text-decoration: underline;
+}

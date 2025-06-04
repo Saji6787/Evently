@@ -1,0 +1,410 @@
+/* =================================
+   ADMIN PANEL STYLES - EVENTLY
+   ================================= */
+
+/* CSS Variables */
+:root {
+    --primary-color: #3B8BFF;
+    --primary-hover: #2a6adf;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #495057;
+    --muted-color: #6c757d;
+    --border-color: #dee2e6;
+    --hover-bg: rgba(0, 0, 0, 0.075);
+    --stripe-bg: rgba(0, 0, 0, 0.05);
+}
+
+/* =================================
+   NAVBAR STYLES
+   ================================= */
+.navbar-custom {
+    background-color: var(--primary-color) !important;
+}
+
+.admin-username {
+    color: #fff;
+    font-weight: 500;
+    margin-right: 1rem;
+}
+
+.logout-link {
+    color: #ffcccb;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.logout-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* =================================
+   SIDEBAR STYLES
+   ================================= */
+.sidebar {
+    min-height: calc(100vh - 56px);
+}
+
+.text-primary-custom {
+    color: var(--primary-color) !important;
+}
+
+.border-primary-custom {
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary-custom {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary-custom:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Remove underlines from sidebar navigation */
+.sidebar .nav-link {
+    text-decoration: none !important;
+}
+
+.sidebar .nav-link:hover {
+    text-decoration: none !important;
+}
+
+/* =================================
+   TABLE STYLES
+   ================================= */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #212529;
+    font-size: 0.875rem;
+    background-color: #fff;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid var(--border-color);
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--border-color);
+    border-top: none;
+    background-color: var(--light-color);
+    font-weight: 600;
+    color: var(--dark-color);
+    position: sticky;
+    top: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+}
+
+.table tbody tr:hover {
+    background-color: var(--hover-bg);
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: var(--stripe-bg);
+}
+
+/* =================================
+   SEARCH STYLES
+   ================================= */
+.search-container {
+    position: relative;
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    color: var(--primary-color);
+    padding: 4px 8px;
+}
+
+.search-btn:hover {
+    color: var(--primary-hover);
+}
+
+/* =================================
+   BUTTON STYLES
+   ================================= */
+
+/* Edit Button */
+.btn-edit {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.btn-edit:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: white;
+    text-decoration: none;
+}
+
+/* Delete Button */
+.btn-delete {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(220, 53, 69, 0.25);
+}
+
+.btn-delete:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+
+/* =================================
+   STATUS STYLES
+   ================================= */
+.status-confirmed {
+    color: var(--success-color);
+    font-weight: bold;
+    background-color: rgba(40, 167, 69, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    color: var(--warning-color);
+    font-weight: bold;
+    background-color: rgba(255, 193, 7, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.status-cancelled {
+    color: var(--danger-color);
+    font-weight: bold;
+    background-color: rgba(220, 53, 69, 0.1);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* =================================
+   CATEGORY STYLES
+   ================================= */
+.category {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+/* =================================
+   EMPTY STATE STYLES
+   ================================= */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--muted-color);
+    margin-bottom: 1rem;
+}
+
+.empty-state h5 {
+    color: var(--muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--muted-color);
+}
+
+/* =================================
+   RESPONSIVE ADJUSTMENTS
+   ================================= */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+    
+    .table-responsive {
+        font-size: 0.8rem;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+    
+    .search-container {
+        width: 100% !important;
+        margin-bottom: 1rem;
+    }
+    
+    .admin-username {
+        display: none;
+    }
+}
+
+/* =================================
+   UTILITY CLASSES
+   ================================= */
+.fw-medium {
+    font-weight: 500;
+}
+
+.text-dark-custom {
+    color: #212529 !important;
+}
+
+.text-muted-custom {
+    color: var(--muted-color) !important;
+}
+
+.bg-light-custom {
+    background-color: var(--light-color) !important;
+}
+
+/* Image upload area */
+.image-upload-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 0.375rem;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload-area:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(59, 139, 255, 0.05);
+}
+
+.image-upload-area.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(59, 139, 255, 0.1);
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 0.375rem;
+}
+
+/* Button styling */
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+}
+
+.btn-primary-custom:hover {
+    background-color: #2a6adf;
+    border-color: #2a6adf;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(59, 139, 255, 0.25);
+}
+
+.btn-primary-custom:focus {
+    box-shadow: 0 0 0 0.2rem rgba(59, 139, 255, 0.5);
+}
+
+.btn-secondary-custom {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.25);
+}
+
+/* Card styling */
+.form-card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-radius: 0.5rem;
+}
+
+/* Required field indicator */
+.required {
+    color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+    
+    .image-upload-area {
+        min-height: 150px;
+    }
+    
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}

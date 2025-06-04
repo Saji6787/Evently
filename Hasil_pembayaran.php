@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Loket</title>
+    <style>
+        /* Reset dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(to bottom,
+                    #0077ff 0%,
+                    #00a1ff 30%,
+                    #7ac8ff 70%,
+                    #eff9fc 100%);
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            width: 100%;
+            max-width: 1000px;
+            margin: 15px auto;
+            padding: 12px 25px;
+            border-radius: 50px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: #0077ff;
+            text-decoration: none;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            backdrop-filter: blur(10px);
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid rgba(0, 123, 255, 0.1);
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 21px rgba(144, 196, 255, 1);
+        }
+
+        .search-bar input:focus {
+            border-color: #007bff;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 25px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .home-link {
+            color: #007bff !important;
+            font-weight: 600 !important;
+        }
+
+        /* Container utama */
+        .container {
+            text-align: center;
+            padding: 20px;
+            justify-content: center;
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        /* Payment Section */
+        .payment-section {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            flex-wrap: wrap;
+        }
+
+        /* QR Container */
+        .qr-container {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .qr-container img {
+            width: 200px;
+            height: 200px;
+            margin: 0;
+            border-radius: 15px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 100, 200, 0.5);
+        }
+
+        /* Upload Section */
+        .upload-section {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 100, 200, 0.4);
+        }
+
+        .upload-section h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .file-upload {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* Drag and Drop Area */
+        .drag-drop-area {
+            width: 100%;
+            min-height: 140px;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+        }
+
+        .drag-drop-area:hover {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .drag-drop-area.drag-over {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+
+        .drag-drop-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .drag-drop-text {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .drag-drop-subtext {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+
+        .or-text {
+            font-size: 12px;
+            opacity: 0.7;
+            margin: 5px 0;
+        }
+
+        .browse-button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: rgb(30, 142, 255);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .browse-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-1px);
+        }
+
+        .upload-status {
+            margin: 8px 0;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 12px;
+            display: none;
+        }
+
+        .upload-success {
+            background-color: rgba(212, 237, 218, 0.9);
+            color: #155724;
+            border: 1px solid rgba(195, 230, 203, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .upload-error {
+            background-color: rgba(248, 215, 218, 0.9);
+            color: #721c24;
+            border: 1px solid rgba(245, 198, 203, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .file-name {
+            margin-top: 5px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            word-break: break-word;
+        }
+
+        .preview-button {
+            display: none;
+            margin: 10px auto;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgb(30, 142, 255);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 100, 200, 0.3);
+        }
+
+        .preview-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 100, 200, 0.5);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 100, 200, 0.3);
+            backdrop-filter: blur(20px);
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #666;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 100, 200, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .modal-filename {
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(30, 142, 255);
+            padding: 10px;
+            background: rgba(30, 142, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Instructions */
+        .instructions {
+            border-radius: 15px;
+            max-width: 800px;
+            width: 85%;
+            margin: 20px auto 15px auto;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 100, 200, 0.5);
+        }
+
+        .instructions ol {
+            padding-left: 25px;
+            list-style-position: outside;
+            text-align: left;
+            margin: 0;
+        }
+
+        .instructions li {
+            margin-bottom: 12px;
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .konfirmasi-button {
+            backdrop-filter: blur(10px);
+            width: 300px;
+            padding: 15px;
+            background: rgb(255, 255, 255);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 100, 200, 0.5);
+            color: rgb(30, 142, 255);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin: 20px auto;
+            display: block;
+        }
+
+        .konfirmasi-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 100, 200, 0.7);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            font-style: normal;
+            font-weight: bold;
+            color: rgb(30, 142, 255);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 20px rgba(0, 100, 200, 0.15);
+            margin-top: auto;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li a {
+            color: #419dff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .footer-links li a:hover {
+            text-decoration: none;
+            background-color: rgba(65, 157, 255, 0.1);
+            color: #0066cc;
+            transform: translateY(-1px);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .payment-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .navbar {
+                margin: 10px;
+                padding: 10px 20px;
+            }
+            
+            .search-bar {
+                margin: 0 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">EVENTLY</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Cari event...">
+        </div>
+        <div class="nav-links">
+            <a href="#" class="home-link">BERANDA</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="header-title">Konfirmasi Pembayaran Anda</div>
+            
+            <!-- QR Code dan Upload Section berdampingan -->
+            <div class="payment-section">
+                <div class="qr-container">
+                    <img src="./assets/QR code.jpg" />
+                </div>
+
+                <!-- Upload Section -->
+                <div class="upload-section">
+                    <h3>Upload Bukti Pembayaran</h3>
+                    <div class="file-upload">
+                        <input type="file" id="paymentProof" class="file-input" accept="image/*">
+                        <div id="dragDropArea" class="drag-drop-area">
+                            <div class="drag-drop-icon">📤</div>
+                            <div class="drag-drop-text">Seret gambar ke sini</div>
+                            <div class="drag-drop-subtext">atau</div>
+                            <div class="or-text"></div>
+                            <label for="paymentProof" class="browse-button">Pilih File</label>
+                        </div>
+                    </div>
+                    <div id="uploadStatus" class="upload-status"></div>
+                    <div class="file-name" id="fileName"></div>
+                </div>
+            </div>
+
+            <button id="previewButton" class="preview-button" style="display: none;">
+                Lihat Preview
+            </button>
+
+            <!-- Modal untuk preview gambar -->
+            <div id="imageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <img id="modalImage" class="modal-image" alt="Preview">
+                    <div class="modal-filename" id="modalFilename"></div>
+                </div>
+            </div>
+
+            <!-- Instruksi pembayaran di bawah -->
+            <div class="instructions">
+                <ol>
+                    <li>Buka aplikasi E-Wallet atau M-Banking di handphone kamu</li>
+                    <li>Klik Scan QR</li>
+                    <li>Arahkan kamera kamu ke Kode QR</li>
+                    <li>Periksa kembali detail pembayaran</li>
+                    <li>Tekan Pay untuk menyelesaikan transaksi</li>
+                </ol>
+            </div>
+
+            <button class="konfirmasi-button" id="konfirmasi-button" onclick="confirmPayment()">KONFIRMASI</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+     <footer class="footer">
+    <p>&copy; 2025 EVENTLY. All Rights Reserved.</p>
+    <ul class="footer-links">
+        <li><a href="#">Contact-Admin</a></li>
+    </ul>
+</footer>
+
+    <script>
+        // Modal elements
+        const modal = document.getElementById('imageModal');
+        const previewButton = document.getElementById('previewButton');
+        const modalImage = document.getElementById('modalImage');
+        const modalFilename = document.getElementById('modalFilename');
+        const closeModal = document.getElementsByClassName('close')[0];
+
+        // Upload elements
+        const dragDropArea = document.getElementById('dragDropArea');
+        const fileInput = document.getElementById('paymentProof');
+        const statusDiv = document.getElementById('uploadStatus');
+        const fileNameDiv = document.getElementById('fileName');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dragDropArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dragDropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dragDropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        dragDropArea.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dragDropArea.classList.add('drag-over');
+        }
+
+        function unhighlight(e) {
+            dragDropArea.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFile(files[0]);
+            }
+        }
+
+        // File input change handler
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        });
+
+        function handleFile(file) {
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                showStatus('File harus berupa gambar!', 'error');
+                resetUpload();
+                return;
+            }
+            
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                showStatus('Ukuran file maksimal 5MB!', 'error');
+                resetUpload();
+                return;
+            }
+            
+            // Show preview and update UI
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                modalImage.src = e.target.result; // Set modal image source
+                modalFilename.textContent = file.name; // Set modal filename
+                
+                showStatus('Gambar berhasil dipilih!', 'success');
+                fileNameDiv.textContent = `File: ${file.name}`;
+                
+                // Show Preview Button
+                previewButton.style.display = 'block';
+                
+                // Update drag drop area to show success state
+                dragDropArea.innerHTML = `
+                    <div class="drag-drop-icon">✅</div>
+                    <div class="drag-drop-text">File berhasil dipilih</div>
+                    <div class="drag-drop-subtext">${file.name}</div>
+                    <div class="or-text">Gambar Anda telah terupload</div>
+                    <label for="paymentProof" class="browse-button">Ganti File</label>
+                `;
+                
+                // Change the border to solid green to show success
+                dragDropArea.style.border = '2px solid #28a745';
+                dragDropArea.style.background = 'rgba(40, 167, 69, 0.1)';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function showStatus(message, type) {
+            statusDiv.textContent = message;
+            statusDiv.className = `upload-status upload-${type}`;
+            statusDiv.style.display = 'block';
+            
+            // Auto hide status after 3 seconds
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function resetUpload() {
+            previewButton.style.display = 'none';
+            fileNameDiv.textContent = '';
+            fileInput.value = '';
+            
+            // Reset drag drop area
+            dragDropArea.innerHTML = `
+                <div class="drag-drop-icon">📤</div>
+                <div class="drag-drop-text">Seret gambar ke sini</div>
+                <div class="drag-drop-subtext">atau</div>
+                <div class="or-text"></div>
+                <label for="paymentProof" class="browse-button">Pilih File</label>
+            `;
+            
+            // Reset styling
+            dragDropArea.style.border = '2px dashed rgba(255, 255, 255, 0.5)';
+            dragDropArea.style.background = 'rgba(255, 255, 255, 0.05)';
+        }
+
+        // Modal functionality
+        previewButton.onclick = function() {
+            modal.style.display = 'block';
+        }
+
+        // Close modal when X is clicked
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Confirm payment function
+        function confirmPayment() {
+            if (!fileInput.files[0]) {
+                alert('Silakan upload bukti pembayaran terlebih dahulu!');
+                return;
+            }
+            
+            // Simulate payment confirmation
+            if (confirm('Apakah Anda yakin ingin mengkonfirmasi pembayaran ini?')) {
+                alert('Pembayaran berhasil dikonfirmasi! Terima kasih.');
+                // Here you would typically send the data to your server
+            }
+        }
+    </script>
+</body>
+</html>

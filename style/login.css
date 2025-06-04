@@ -1,0 +1,102 @@
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #0072ff, #6dd5fa);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header, footer {
+      background-color: rgb(255, 255, 255);
+      padding: 1rem;
+      font-weight: 600;
+      user-select: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #0072ff;
+      font-size: 1.5rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: white;
+      border-radius: 10px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    .login-box input[type="email"],
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.75rem;
+      background: linear-gradient(to right, #0072ff, #6dd5fa);
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-box a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #0072ff;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #0072ff;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem;
+        border-radius: 0;
+      }
+      footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+    }

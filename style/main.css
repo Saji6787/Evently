@@ -1,0 +1,37 @@
+@import url('navbar.css');
+@import url('searchbar.css');
+@import url('footer.css');
+@import url('sidebar.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+      
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: linear-gradient(to bottom,
+    #0077ff 0%,
+    #00a1ff 30%,
+    #7ac8ff 70%,
+    #eff9fc 100%);
+    background-attachment: fixed; /* This fixes the gradient */
+    background-size: 100% 100%; /* Ensures full coverage */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+    
+  main {
+    flex:1;
+  }
+
+
+
